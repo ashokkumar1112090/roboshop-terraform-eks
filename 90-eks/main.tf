@@ -31,10 +31,38 @@ module "eks" {
 
   # EKS Managed Node Group(s)
   eks_managed_node_groups = {
-    blue = {
-      create = var.enable_blue
+  #   blue = {
+  #     create = var.enable_blue
+  #     ami_type       = "AL2023_x86_64_STANDARD"
+  #     kubernetes_version = var.eks_nodegroup_blue_version
+  #     instance_types = ["m7i-flex.large"]
+  #     iam_role_additional_policies  = {
+  #       amazonEFS = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
+  #       amazonEBS = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+  #     }
+      
+  #     # cluster nodes autoscaling
+  #     min_size     = 2
+  #     max_size     = 10
+  #     desired_size = 2
+
+  #     # taints = {
+  #     #   upgrade = {
+  #     #     key = "upgrade"
+  #     #     value = "true"
+  #     #     effect = "NO_SCHEDULE"
+  #     #   }
+  #     # }
+
+  #     labels = {
+  #       nodegroup = "blue"
+  #     }
+    #  }
+
+    green = {
+      create = var.enable_green
       ami_type       = "AL2023_x86_64_STANDARD"
-      kubernetes_version = var.eks_nodegroup_blue_version
+      kubernetes_version = var.eks_nodegroup_green_version
       instance_types = ["m7i-flex.large"]
       iam_role_additional_policies  = {
         amazonEFS = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
@@ -53,34 +81,6 @@ module "eks" {
       #     effect = "NO_SCHEDULE"
       #   }
       # }
-
-      labels = {
-        nodegroup = "blue"
-      }
-    }
-
-    green = {
-      create = var.enable_green
-      ami_type       = "AL2023_x86_64_STANDARD"
-      kubernetes_version = var.eks_nodegroup_green_version
-      instance_types = ["m7i-flex.large"]
-      iam_role_additional_policies  = {
-        amazonEFS = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
-        amazonEBS = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
-      }
-      
-      # cluster nodes autoscaling
-      min_size     = 2
-      max_size     = 10
-      desired_size = 2
-
-      taints = {
-        upgrade = {
-          key = "upgrade"
-          value = "true"
-          effect = "NO_SCHEDULE"
-        }
-      }
 
       labels = {
         nodegroup = "green"
